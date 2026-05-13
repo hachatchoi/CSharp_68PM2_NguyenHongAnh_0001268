@@ -26,5 +26,24 @@ namespace login
         {
 
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            string email = "0001268@st.huce.edu.vn";
+            string mssv = "0001268";
+
+            string username = txtUsername.Text.Trim();
+            string password = txtPassword.Text.Trim();
+
+            if (username == email && password == mssv)
+            {
+                MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Đăng nhập thất bại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            }
     }
 }
