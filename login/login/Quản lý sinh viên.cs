@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace login
+namespace QuanLySinhVien
 {
     public partial class Quản_lý_sinh_viên : Form
     {

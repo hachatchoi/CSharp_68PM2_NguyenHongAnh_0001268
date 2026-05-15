@@ -1,4 +1,4 @@
-﻿namespace login
+﻿namespace QuanLySinhVien
 {
     partial class Quản_lý_sinh_viên
     {

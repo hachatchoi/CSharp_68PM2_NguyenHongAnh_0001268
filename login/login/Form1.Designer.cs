@@ -1,4 +1,4 @@
-﻿namespace login
+﻿namespace QuanLySinhVien
 {
     partial class Form1
     {
