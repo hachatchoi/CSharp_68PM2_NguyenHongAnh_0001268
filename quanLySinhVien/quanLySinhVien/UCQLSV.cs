@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QuanLySinhVien
+namespace login
 {
-    public partial class Quản_lý_sinh_viên : Form
+    public partial class UCQLSV : UserControl
     {
-        public Quản_lý_sinh_viên()
+        public UCQLSV()
         {
             InitializeComponent();
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using login;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace QuanLySinhVien
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Quản_lý_sinh_viên());
+            Application.Run(new FormMain());
         }
     }
 }
