@@ -7,6 +7,7 @@ using System.Windows.Forms;
 
 namespace QuanLySinhVien
 {
+    
     internal static class Program
     {
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLySinhVien;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,72 @@ namespace login
         public UCQLSV()
         {
             InitializeComponent();
+        }
+
+        private void UCQLSV_Load(object sender, EventArgs e)
+        {
+            DatabaseDataContext db = new DatabaseDataContext();
+            List<tbl_sinhvien> dSSV = db.tbl_sinhviens.ToList();
+            dataGridView1.DataSource = dSSV;
+
+            LoadComboBoxGioiTinh();
+            LoadComboBoxLop();
+
+
+        }
+        public void LoadComboBoxGioiTinh()
+        {
+            cboGioiTinh.Items.Clear();
+            cboGioiTinh.Items.Add("Nam");
+            cboGioiTinh.Items.Add("Nữ");
+            cboGioiTinh.SelectedIndex = -1;
+
+        }
+        public void LoadComboBoxLop()
+        {
+            DatabaseDataContext db = new DatabaseDataContext();
+            List<tbl_lophoc> dSLop = db.tbl_lophocs.ToList();
+            cboLop.DataSource = dSLop;
+            cboLop.DisplayMember = "tenlop";
+            cboLop.ValueMember = "malop";
+            cboLop.SelectedIndex = -1;
+        }
+
+        private void btlThem_Click(object sender, EventArgs e)
+        {
+            DatabaseDataContext db = new DatabaseDataContext();
+            tbl_sinhvien sv = new tbl_sinhvien();
+            sv.masv = txtMaSV.Text;
+            sv.hoten = txtHoTen.Text;
+            sv.gioitinh = cboGioiTinh.SelectedItem.ToString();
+            sv.ngaysinh = dtpNgaySinh.Value;
+            sv.malop = cboLop.SelectedValue.ToString();
+            db.tbl_sinhviens.InsertOnSubmit(sv);
+            db.SubmitChanges();
+            List<tbl_sinhvien> dSSV = db.tbl_sinhviens.ToList();
+            dataGridView1.DataSource = dSSV;
+
+
+        }
+
+        private void cboGioiTinh_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            txtMaSV.Clear();
+            txtHoTen.Clear();
+            cboLop.SelectedIndex = -1;
+            cboGioiTinh.SelectedIndex = -1;
+            DatabaseDataContext db = new DatabaseDataContext();
+            List<tbl_sinhvien> dSSV = db.tbl_sinhviens.ToList();
+            dataGridView1.DataSource = dSSV;
+            
+           
+            
         }
     }
 }
