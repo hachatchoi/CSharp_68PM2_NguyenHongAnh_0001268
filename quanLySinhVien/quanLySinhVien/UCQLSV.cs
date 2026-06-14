@@ -83,5 +83,19 @@ namespace login
            
             
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0) {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+
+                // lấy thông tin lên các ô input
+                txtMaSV.Text = row.Cells["masv"].Value.ToString();
+                txtHoTen.Text = row.Cells["hoten"].Value.ToString();
+                cboGioiTinh.SelectedItem = row.Cells["gioitinh"].Value.ToString();
+                dtpNgaySinh.Value = Convert.ToDateTime(row.Cells["ngaysinh"].Value);
+                cboLop.SelectedValue = row.Cells["malop"].Value.ToString();
+            }
+        }
     }
 }

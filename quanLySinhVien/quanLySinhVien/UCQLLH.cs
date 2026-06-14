@@ -19,7 +19,9 @@ namespace login
 
         private void UCQLLH_Load(object sender, EventArgs e)
         {
-
+            DatabaseDataContext db = new DatabaseDataContext();
+            List<tbl_lophoc> lHoc = db.tbl_lophocs.ToList();
+            dataGridView1.DataSource = lHoc;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

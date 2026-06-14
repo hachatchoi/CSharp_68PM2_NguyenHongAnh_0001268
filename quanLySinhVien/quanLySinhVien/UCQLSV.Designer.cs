@@ -167,7 +167,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(896, 778);
+            this.label7.Location = new System.Drawing.Point(1076, 778);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(234, 25);
             this.label7.TabIndex = 44;
@@ -175,7 +175,7 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(1355, 755);
+            this.button10.Location = new System.Drawing.Point(1535, 755);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(96, 70);
             this.button10.TabIndex = 43;
@@ -184,7 +184,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(1240, 755);
+            this.button9.Location = new System.Drawing.Point(1420, 755);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(96, 70);
             this.button9.TabIndex = 42;
@@ -193,7 +193,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(702, 755);
+            this.button8.Location = new System.Drawing.Point(882, 755);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(96, 70);
             this.button8.TabIndex = 41;
@@ -202,7 +202,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(591, 755);
+            this.button7.Location = new System.Drawing.Point(771, 755);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(96, 70);
             this.button7.TabIndex = 40;
@@ -292,8 +292,9 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 82;
             this.dataGridView1.RowTemplate.Height = 33;
-            this.dataGridView1.Size = new System.Drawing.Size(840, 534);
+            this.dataGridView1.Size = new System.Drawing.Size(1249, 534);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // UCQLSV
             // 
@@ -314,7 +315,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btlThem);
             this.Name = "UCQLSV";
-            this.Size = new System.Drawing.Size(1703, 844);
+            this.Size = new System.Drawing.Size(2219, 893);
             this.Load += new System.EventHandler(this.UCQLSV_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
