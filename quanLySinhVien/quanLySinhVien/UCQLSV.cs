@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -95,6 +96,42 @@ namespace login
                 cboGioiTinh.SelectedItem = row.Cells["gioitinh"].Value.ToString();
                 dtpNgaySinh.Value = Convert.ToDateTime(row.Cells["ngaysinh"].Value);
                 cboLop.SelectedValue = row.Cells["malop"].Value.ToString();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtMaSV.Text))
+            {
+                MessageBox.Show("Vui lòng chọn sinh viên cần xóa");
+                return;
+            }
+            string connectionString = "Data Source=alexxxx\\MSSQLSERVER04;Initial Catalog=qlsv;Persist Security Info=True;User ID=sa;Password=dream1012;TrustServerCertificate=True";
+            string query = " UPDATE tbl_sinhviens SET hoten = @hoten, gioitinh=@gioitinh, ngaysinh = @ngaysinh, malop = @malop WHERE masv = @masv";
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@masv", txtMaSV.Text);
+                    cmd.Parameters.AddWithValue("@hoten", txtHoTen.Text);
+                    cmd.Parameters.AddWithValue("@gioitinh", cboGioiTinh.SelectedItem.ToString());
+                    cmd.Parameters.AddWithValue("@ngaysinh", dtpNgaySinh.Value);
+                    cmd.Parameters.AddWithValue("@malop", cboLop.SelectedValue.ToString());
+                    conn.Open();
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Cập nhật sinh viên thành công");
+                        // Cập nhật lại DataGridView
+                        DatabaseDataContext db = new DatabaseDataContext();
+                        List<tbl_sinhvien> dSSV = db.tbl_sinhviens.ToList();
+                        dataGridView1.DataSource = dSSV;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cập nhật sinh viên thất bại");
+                    }
+                }
             }
         }
     }
