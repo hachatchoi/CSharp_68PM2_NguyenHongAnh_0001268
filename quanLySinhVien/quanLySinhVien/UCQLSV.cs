@@ -14,6 +14,10 @@ namespace login
 {
     public partial class UCQLSV : UserControl
     {
+        int tranghientai = 1;
+        int sodongtrenmottrang = 10;
+        int tongsotrang = 0;
+        int tongsobanghi = 0;
         public UCQLSV()
         {
             InitializeComponent();
@@ -67,7 +71,7 @@ namespace login
 
         private void cboGioiTinh_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
 
         }
 
@@ -80,12 +84,13 @@ namespace login
             DatabaseDataContext db = new DatabaseDataContext();
             List<tbl_sinhvien> dSSV = db.tbl_sinhviens.ToList();
             dataGridView1.DataSource = dSSV;
-            
+
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) {
+            if (e.RowIndex >= 0)
+            {
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
 
                 // lấy thông tin lên các ô input
@@ -165,9 +170,93 @@ namespace login
                             MessageBox.Show("Xóa sinh viên thất bại");
                         }
                     }
+                }
+
+            }
         }
 
+        public void LoadDuLieu(string key = "")
+        {
+            using (DatabaseDataContext db = new DatabaseDataContext())
+            {
+                
+                // Lay toan bo sinh vien
+                var query = db.tbl_sinhviens.AsQueryable();
+
+                // LOC SU LIEU QU NUT TIM KIEM
+                if (!string.IsNullOrEmpty(key))
+                {
+                    query = query.Where(sv => sv.masv.Trim().Contains(key)
+                                              || sv.hoten.Trim().Contains(key)
+                                              || sv.malop.Trim().Contains(key));
+                }
+                tongsobanghi = query.Count();
+                tongsotrang = (int)Math.Ceiling((double)tongsobanghi / sodongtrenmottrang);
+
+                if (tongsotrang == 0)
+                {
+                    tongsotrang = 1;
+                }
+                //Áp dụng kỹ thuật phân trang: Bỏ qua(Skip) các trang trước, lấy(Take) dữ liệu trang hiện tại
+
+                var hienThiDuLieu = query.Skip((tranghientai - 1) * sodongtrenmottrang)
+                                            .Take(sodongtrenmottrang)
+                                            .Select(sv => new
+                                            {
+                                                sv.masv,
+                                                sv.hoten,
+                                                sv.ngaysinh,
+                                                sv.gioitinh,
+                                                sv.malop
+                                            })
+                                            .ToList();
+                //Đổ lên DataGridView và cập nhật dòng Label báo số trang (Trang 1/1 | 3 bản ghi)
+                dataGridView1.DataSource = hienThiDuLieu;
+
+                label7.Text = $"Trang {tranghientai}/{tongsotrang} | {tongsobanghi} bản ghi";
+            }
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            tranghientai = 1;
+            string key = textBox5.Text.Trim();
+            LoadDuLieu(key);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (tranghientai > 1)
+            {
+                tranghientai--;
+                string key = textBox5.Text.Trim();
+                LoadDuLieu(key);
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (tranghientai < tongsotrang)
+            {
+                tranghientai++;
+                string key = textBox5.Text.Trim();
+                LoadDuLieu(key);
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            tranghientai = tongsotrang;
+            string key = textBox5.Text.Trim();
+            LoadDuLieu(key);
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            tranghientai = 1;
+            string key = textBox5.Text.Trim();
+            LoadDuLieu(key);
+        }
     }
-    }
-}
 }
