@@ -179,10 +179,74 @@ namespace login
             }
 
         }
-                                               
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string malopdcchon = textBox2.Text.Trim();
+            if (string.IsNullOrEmpty(malopdcchon))
+            {
+                MessageBox.Show("Vui lòng chọn một lớp học để xem danh sách sinh viên.");
+                return;
+            }
+            using (DatabaseDataContext db = new DatabaseDataContext())
+            {
+                var DSSV = db.tbl_sinhviens
+                    .Where(sv => sv.malop == malopdcchon)
+                    .Select(sv => new
+                    {
+                        sv.masv,
+                        sv.malop,
+                        sv.gioitinh,
+                        sv.hoten,
+                        sv.ngaysinh,
+
+                    }) .ToList();
+                if (DSSV.Count > 0)
+                { 
+                    dataGridView1.DataSource = DSSV;
+                }
+                else
+                {
+                    MessageBox.Show("Lớp học này chưa có sinh viên nào.");
+                    return;
+                }
+            }
+            
+                
             }
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (tranghientai > 1)
+            {
+                tranghientai--;
+                LoadDuLieu(textBox5.Text.Trim());
+            }
         }
-    
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (tranghientai < tongsotrang)
+            {
+                tranghientai++;
+                LoadDuLieu(textBox5.Text.Trim());
+            }
+    }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            tranghientai = 1;
+            LoadDuLieu(textBox5.Text.Trim());
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            tranghientai = tongsotrang;
+            LoadDuLieu(textBox5.Text.Trim());
+        }
+    }
+}
+
+
 
 
