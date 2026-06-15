@@ -81,6 +81,7 @@ namespace login
             txtHoTen.Clear();
             cboLop.SelectedIndex = -1;
             cboGioiTinh.SelectedIndex = -1;
+            textBox5.Clear();
             DatabaseDataContext db = new DatabaseDataContext();
             List<tbl_sinhvien> dSSV = db.tbl_sinhviens.ToList();
             dataGridView1.DataSource = dSSV;
@@ -106,7 +107,7 @@ namespace login
         {
             if (string.IsNullOrEmpty(txtMaSV.Text))
             {
-                MessageBox.Show("Vui lòng chọn sinh viên cần xóa");
+                MessageBox.Show("Vui lòng chọn sinh viên cần sửa");
                 return;
             }
             string connectionString = "Data Source=alexxxx\\MSSQLSERVER04;Initial Catalog=qlsv;Persist Security Info=True;User ID=sa;Password=dream1012;TrustServerCertificate=True";
